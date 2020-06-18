@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import Nav from './components/Nav';
+import {Switch, Route} from 'react-router-dom'
+
+import Home from './components/Home'
+import About from './components/About'
+import Contacts from './components/Contacts'
+import Users from './components/Users';
+import UserDetail from './components/UserDetail';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <Switch>
+          <Route exact path="/" component={Home} />
+          {/* <Route path="/about" component={About}/> */}
+          <Route path="/about" render={() => {
+              return <About name={'Manish'} />
+          }}/>
+          <Route path="/contacts" component={Contacts}/>
+          <Route exact path="/users" component={Users} />
+          <Route path="/users/:id" component={UserDetail} />
+      </Switch>
     </div>
   );
 }
